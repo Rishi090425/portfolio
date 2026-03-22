@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishi Kumar | Full Stack Developer</title>
+    <meta name="description" content="Portfolio of Rishi Kumar, a Full Stack Developer specializing in React, Node.js, and Java.">
+    <!-- Google Fonts: Outfit for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Devicon Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Decor (Glow Effects) -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <nav id="navbar" class="glass-nav">
+        <div class="nav-container">
+            <a href="#" class="logo">RK<span>.</span></a>
+            
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+                    <i data-lucide="sun" class="icon-sun"></i>
+                    <i data-lucide="moon" class="icon-moon"></i>
+                </button>
+                <button id="mobile-menu-btn" class="icon-btn mobile-only" aria-label="Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+            <a href="#about" class="mobile-link">About</a>
+            <a href="#education" class="mobile-link">Education</a>
+            <a href="#skills" class="mobile-link">Skills</a>
+            <a href="#projects" class="mobile-link">Projects</a>
+            <a href="#contact" class="mobile-link">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section reveal">
+            <div class="hero-content">
+                <p class="greeting"><span class="code-prompt">~ $</span> whoami</p>
+                <h1 class="name-title">Rishi_Kumar<span class="blink-cursor">_</span></h1>
+                <h2 class="role-title">I build <span class="gradient-text">highly robust</span> architectures.</h2>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="mac-btns">
+                            <span class="mac-btn close-btn"></span>
+                            <span class="mac-btn min-btn"></span>
+                            <span class="mac-btn max-btn"></span>
+                        </div>
+                        <div class="terminal-title">~/portfolio.sh</div>
+                    </div>
+                    <div class="terminal-body">
+                        <p class="terminal-text"><span class="code-prompt">❯</span> <span id="typing-text"></span><span class="cursor">|</span></p>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="https://github.com/Rishi090425/CV/blob/main/CV%20updated%20(1).pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                        Resume <i data-lucide="download"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path class="shape-fill" d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,192C672,213,768,203,864,181.3C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+        <!-- About & Education Section -->
+        <section id="about" class="section reveal">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-text glass-card flex-col">
+                    <h3 class="about-headline">Engineering digital experiences with precision & modern aesthetics.</h3>
+                    <p class="about-p">
+                        Hello! I'm Rishi, a passionate Full-Stack Engineer based in India. I specialize in architecting scalable, high-performance web applications from the ground up. My philosophy merges clean code principles with pixel-perfect, premium user interfaces.
+                    </p>
+                    <p class="about-p">
+                        I am currently pursuing my B.Tech in Computer Science at LPU, whilst actively building real-world projects—ranging from AI-driven data analyzers to comprehensive financial platforms. I thrive on solving complex backend architectural challenges as much as I love crafting beautiful, dark-mode frontend experiences.
+                    </p>
+                    
+                    <div class="about-stats mt-4">
+                        <div class="stat-badge">
+                            <span class="stat-num">4+</span>
+                            <span class="stat-label">Full-Stack<br>Projects</span>
+                        </div>
+                        <div class="stat-badge">
+                            <span class="stat-num">18+</span>
+                            <span class="stat-label">Technologies<br>Mastered</span>
+                        </div>
+                        <div class="stat-badge">
+                            <span class="stat-num">10k+</span>
+                            <span class="stat-label">Lines of<br>Clean Code</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="profile-photo-container">
+                        <div class="profile-glow"></div>
+                        <!-- IMPORTANT: When you are ready, simply place your photo inside the 'assets' folder and name it 'profile.jpg'. It will automatically overwrite the temporary blue 'RK' initials! -->
+                        <img src="assets/profile.jpg" alt="Rishi Kumar" class="profile-photo" onerror="this.src='https://ui-avatars.com/api/?name=Rishi+Kumar&background=06b6d4&color=fff&size=512&font-size=0.4'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Wave Divider -->
+        <div class="wave-divider wave-flip">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path class="shape-fill" d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,192C672,213,768,203,864,181.3C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+        <!-- Projects Section -->
+        <section id="projects" class="section reveal">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-carousel-wrapper">
+                <button class="carousel-btn prev-btn" aria-label="Previous Project">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="carousel-viewport">
+                    <div class="carousel-track" id="project-track">
+                        
+                        <div class="project-slide">
+                            <div class="project-card group">
+                                <div class="project-image">
+                                    <img src="assets/cv_analyzer.png" alt="AI CV Analyzer">
+                                    <div class="project-overlay">
+                                        <a href="https://github.com/Rishi090425/AI-Resume-Analyzer" target="_blank" aria-label="GitHub"><i data-lucide="github"></i></a>
+                                    </div>
+                                </div>
+                                <div class="project-content">
+                                    <h3 class="project-title"><a href="https://github.com/Rishi090425/AI-Resume-Analyzer" target="_blank">AI CV Analyzer</a></h3>
+                                    <p class="project-desc">An intelligent system that analyzes resumes against job descriptions, providing detailed feedback, match percentages, and optimization suggestions to improve candidate success rates.</p>
+                                    <ul class="tech-list">
+                                        <li>React</li>
+                                        <li>Node.js</li>
+                                        <li>AI Integration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-slide">
+                            <div class="project-card group">
+                                <div class="project-image">
+                                    <img src="assets/stock_market.png" alt="Stockmarket Dashboard">
+                                    <div class="project-overlay">
+                                        <a href="https://github.com/Rishi090425/-Stock-Market-Dashboard-with-User-Admin-Panel" target="_blank" aria-label="GitHub"><i data-lucide="github"></i></a>
+                                    </div>
+                                </div>
+                                <div class="project-content">
+                                    <h3 class="project-title"><a href="https://github.com/Rishi090425/-Stock-Market-Dashboard-with-User-Admin-Panel" target="_blank">Stockmarket Dashboard</a></h3>
+                                    <p class="project-desc">A comprehensive financial dashboard providing real-time stock data tracking, interactive charts, and portfolio analytics with a sleek dark-mode interface.</p>
+                                    <ul class="tech-list">
+                                        <li>React</li>
+                                        <li>API Integration</li>
+                                        <li>Chart.js</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-slide">
+                            <div class="project-card group">
+                                <div class="project-image">
+                                    <img src="assets/expense_sharing.png" alt="Expense Sharing System">
+                                    <div class="project-overlay">
+                                        <a href="https://github.com/Rishi090425/Expense-Sharing-System" target="_blank" aria-label="GitHub"><i data-lucide="github"></i></a>
+                                    </div>
+                                </div>
+                                <div class="project-content">
+                                    <h3 class="project-title"><a href="https://github.com/Rishi090425/Expense-Sharing-System" target="_blank">Expense Sharing System</a></h3>
+                                    <p class="project-desc">A platform that simplifies splitting bills among friends and roommates. Features transparent balance tracking, secure group management, and automated debt simplification.</p>
+                                    <ul class="tech-list">
+                                        <li>MERN Stack</li>
+                                        <li>Express</li>
+                                        <li>MongoDB</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-slide">
+                            <div class="project-card group">
+                                <div class="project-image">
+                                    <img src="assets/placement_tracker.png" alt="Placement Tracker">
+                                    <div class="project-overlay">
+                                        <a href="https://github.com/Rishi090425/Placement-Tracker" target="_blank" aria-label="GitHub"><i data-lucide="github"></i></a>
+                                    </div>
+                                </div>
+                                <div class="project-content">
+                                    <h3 class="project-title"><a href="https://github.com/Rishi090425/Placement-Tracker" target="_blank">Placement Tracker</a></h3>
+                                    <p class="project-desc">A comprehensive portal for tracking job applications, interview stages, and technical preparation. Helps students monitor their journey from application to offer.</p>
+                                    <ul class="tech-list">
+                                        <li>Java</li>
+                                        <li>Full Stack</li>
+                                        <li>DB Management</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <button class="carousel-btn next-btn" aria-label="Next Project">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+            <div class="view-more text-center mt-12">
+                <a href="https://github.com/Rishi090425" target="_blank" class="btn btn-outline">
+                    View more on GitHub
+                </a>
+            </div>
+        </section>
+
+
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path class="shape-fill" d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,192C672,213,768,203,864,181.3C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+        <!-- Skills Section -->
+        <section id="skills" class="section reveal">
+            <h2 class="section-title" style="justify-content: center;">Programming Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card glass-card">
+                    <i class="devicon-mongodb-plain colored"></i>
+                    <h3>MongoDB</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-express-original" style="font-size: 5rem; color: var(--text-primary);"></i>
+                    <h3>Express.js</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-react-original colored"></i>
+                    <h3>React.js</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-nodejs-plain colored"></i>
+                    <h3>Node.js</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-javascript-plain colored" style="font-size: 3.5rem;"></i>
+                    <h3 style="margin-top: 0.5rem;">JavaScript</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-python-plain colored"></i>
+                    <h3>Python</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-nextjs-original" style="background: white; border-radius: 50%; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; color: black; font-size: 2.5rem; margin-bottom: 0.5rem;"></i>
+                    <h3>Next.js</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-typescript-plain colored" style="font-size: 3.5rem;"></i>
+                    <h3 style="margin-top: 0.5rem;">TypeScript</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-html5-plain colored"></i>
+                    <h3>HTML</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-css3-plain colored"></i>
+                    <h3>CSS</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-tailwindcss-plain colored"></i>
+                    <h3>Tailwind CSS</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-git-plain colored"></i>
+                    <h3>Git</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-github-original" style="font-size: 3.5rem; margin-top: 0.5rem; color: var(--text-primary);"></i>
+                    <h3 style="margin-top: 0.5rem;">GitHub</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-postgresql-plain colored"></i>
+                    <h3>PostgreSQL</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-docker-plain colored"></i>
+                    <h3>Docker</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-java-plain colored" style="font-size: 4.5rem;"></i>
+                    <h3>Java</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-mysql-plain colored"></i>
+                    <h3>MySQL</h3>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="devicon-redux-original colored"></i>
+                    <h3>Redux</h3>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Wave Divider -->
+        <div class="wave-divider wave-flip">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path class="shape-fill" d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,192C672,213,768,203,864,181.3C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+        <!-- Education Section -->
+        <section id="education" class="section reveal">
+            <h2 class="section-title text-center" style="justify-content: center; color: var(--text-primary); margin-bottom: 2rem;">Education</h2>
+            <div class="edu-cards-container">
+                <div class="edu-card">
+                    <div class="edu-card-row">
+                        <i data-lucide="calendar" class="edu-icon"></i>
+                        <span class="edu-date-text">2023 - Present</span>
+                    </div>
+                    <div class="edu-card-row">
+                        <i data-lucide="graduation-cap" class="edu-icon edu-icon-large"></i>
+                        <h3 class="edu-degree-text">B.Tech in Computer Science and Engineering</h3>
+                    </div>
+                    <div class="edu-card-row">
+                        <i data-lucide="building" class="edu-icon"></i>
+                        <span class="edu-school-text">Lovely Professional University, Punjab</span>
+                    </div>
+                    <p class="edu-desc">
+                        Currently pursuing B.Tech in Computer Science and Engineering with a strong academic performance, holding a CGPA of 6.75. Actively engaged in full stack development and emerging technologies.
+                    </p>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-card-row">
+                        <i data-lucide="calendar" class="edu-icon"></i>
+                        <span class="edu-date-text">2022 - 2023</span>
+                    </div>
+                    <div class="edu-card-row">
+                        <i data-lucide="graduation-cap" class="edu-icon edu-icon-large"></i>
+                        <h3 class="edu-degree-text">Higher Secondary Education (Class 12)</h3>
+                    </div>
+                    <div class="edu-card-row">
+                        <i data-lucide="building" class="edu-icon"></i>
+                        <span class="edu-school-text">RPS Public School, Rewari</span>
+                    </div>
+                    <p class="edu-desc">
+                        Completed Higher Secondary Education, achieving a percentage of 91.4%. Developed a strong foundation in mathematics, physics, and computer science.
+                    </p>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-card-row">
+                        <i data-lucide="calendar" class="edu-icon"></i>
+                        <span class="edu-date-text">2020 - 2021</span>
+                    </div>
+                    <div class="edu-card-row">
+                        <i data-lucide="graduation-cap" class="edu-icon edu-icon-large"></i>
+                        <h3 class="edu-degree-text">Secondary Education (Class 10)</h3>
+                    </div>
+                    <div class="edu-card-row">
+                        <i data-lucide="building" class="edu-icon"></i>
+                        <span class="edu-school-text">RPS Public School, Rewari</span>
+                    </div>
+                    <p class="edu-desc">
+                        Completed Secondary Education with an overall percentage of 79%, establishing early analytical and technical fundamentals.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path class="shape-fill" d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,192C672,213,768,203,864,181.3C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section reveal">
+            <div class="contact-content glass-card">
+                <h2 class="section-title text-center">Get In Touch</h2>
+                <p class="contact-text text-center">
+                    Whether you have a question or just want to say hi, my inbox is always open. I'll try my best to get back to you!
+                </p>
+                <div class="contact-methods">
+                    <a href="mailto:rishi.kumar14125@gmail.com" class="btn btn-primary btn-large">Say Hello</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/Rishi090425" target="_blank" aria-label="GitHub"><i data-lucide="github"></i></a>
+                    <a href="https://www.linkedin.com/in/rishi-kumar0/" target="_blank" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                    <a href="mailto:rishi.kumar14125@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built with <i data-lucide="cpu" class="inline-icon"></i> by Rishi Kumar</p>
+        <p class="text-sm">Driven by clean code & elegant design.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
