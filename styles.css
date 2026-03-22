@@ -1034,7 +1034,9 @@ footer {
         display: flex;
     }
     .about-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 2.5rem;
     }
     .hero-cta {
         flex-direction: column;
