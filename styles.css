@@ -885,6 +885,10 @@ main {
     transform: translateY(0);
 }
 
+.project-overlay a i {
+    color: white !important;
+}
+
 .project-content {
     padding: 1.5rem;
     display: flex;
