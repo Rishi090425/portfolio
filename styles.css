@@ -207,6 +207,49 @@ img {
     right: -100px;
 }
 
+/* ======= FLOATING RESUME BUTTON ======= */
+#resume-fab {
+    position: fixed;
+    top: 20px;
+    right: 2rem;
+    z-index: 200;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 1.1rem;
+    background: var(--gradient-brand);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 99px;
+    text-decoration: none;
+    box-shadow: 0 4px 18px rgba(6, 182, 212, 0.4);
+    /* Hidden: slid off the top */
+    opacity: 0;
+    transform: translateY(-70px);
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.22,1,0.36,1),
+                transform 0.4s cubic-bezier(0.22,1,0.36,1),
+                box-shadow 0.3s ease;
+}
+
+#resume-fab.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+#resume-fab:hover {
+    box-shadow: 0 6px 24px rgba(6, 182, 212, 0.65);
+    transform: translateY(3px) scale(1.04);
+}
+
+#resume-fab svg {
+    width: 16px;
+    height: 16px;
+}
+
 /* ======= NAVIGATION ======= */
 .glass-nav {
     position: fixed;
@@ -1075,4 +1118,360 @@ footer {
     .project-slide {
         padding: 0; 
     }
+}
+
+/* ============================================
+   ANIMATIONS — SCROLL-TRIGGERED SYSTEM
+   Every element with [data-anim] starts hidden
+   and becomes visible when JS adds .in-view
+   ============================================ */
+
+/* ── Scroll Progress Bar ── */
+#progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--gradient-brand);
+    z-index: 9999;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px var(--brand-primary);
+}
+
+/* ── Particle Canvas ── */
+#particles-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.45;
+}
+
+/* ── Background Glow Drift ── */
+@keyframes glow-drift-1 {
+    0%   { transform: translate(0,    0)    scale(1);    }
+    33%  { transform: translate(60px,-40px) scale(1.1);  }
+    66%  { transform: translate(-40px,60px) scale(0.95); }
+    100% { transform: translate(0,    0)    scale(1);    }
+}
+@keyframes glow-drift-2 {
+    0%   { transform: translate(0,    0)    scale(1);   }
+    33%  { transform: translate(-70px,50px) scale(1.1); }
+    66%  { transform: translate(50px,-60px) scale(0.9); }
+    100% { transform: translate(0,    0)    scale(1);   }
+}
+.glow-1 { animation: glow-drift-1 18s ease-in-out infinite; }
+.glow-2 { animation: glow-drift-2 22s ease-in-out infinite; }
+
+/* ── Hero Stagger Entrance ── */
+@keyframes hero-fade-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.hero-section .greeting        { opacity: 0; animation: hero-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s forwards; }
+.hero-section .name-title      { opacity: 0; animation: hero-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; }
+.hero-section .role-title      { opacity: 0; animation: hero-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.6s forwards; }
+.hero-section .terminal-window { opacity: 0; animation: hero-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.8s forwards; }
+.hero-section .hero-cta        { opacity: 0; animation: hero-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 1.0s forwards; }
+
+/* ══════════════════════════════════════════
+   DATA-ANIM INITIAL HIDDEN STATES
+   ══════════════════════════════════════════ */
+[data-anim] {
+    /* All animated elements start invisible */
+    opacity: 0;
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-duration: 0.75s;
+    will-change: opacity, transform;
+}
+
+/* Starting positions per animation type */
+[data-anim="fade-up"]   { transform: translateY(50px); }
+[data-anim="fade-down"] { transform: translateY(-40px); }
+[data-anim="slide-left"]{ transform: translateX(-70px); }
+[data-anim="slide-right"]{ transform: translateX(70px); }
+
+[data-anim="zoom-up"] {
+    transform: translateY(60px) scale(0.88);
+}
+[data-anim="zoom-in"] {
+    transform: scale(0.82);
+}
+[data-anim="flip-up"] {
+    transform: perspective(600px) rotateX(40deg) translateY(30px) scale(0.9);
+    transform-origin: center bottom;
+}
+
+/* ══════════════════════════════════════════
+   .in-view — the ACTIVE state (all types)
+   ══════════════════════════════════════════ */
+[data-anim].in-view {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1) perspective(600px) rotateX(0deg);
+}
+
+/* ── Navigation Link Underline Sweep ── */
+.nav-link {
+    position: relative;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 2px;
+    background: var(--brand-primary);
+    transition: width 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.nav-link:hover::after { width: 100%; }
+
+/* ── Skill card hover tilt handled via JS ── */
+.skills-grid { perspective: 800px; }
+.skill-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, opacity 0.75s cubic-bezier(0.22,1,0.36,1);
+    will-change: transform, opacity;
+}
+.skill-card:hover {
+    box-shadow: 0 12px 40px -12px rgba(6,182,212,0.45);
+    border-color: var(--brand-primary);
+}
+
+/* ── Education card hover ── */
+.edu-card {
+    transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1),
+                transform 0.75s cubic-bezier(0.22,1,0.36,1),
+                border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.edu-card.in-view:hover {
+    border-left-color: var(--brand-secondary);
+    box-shadow: -4px 0 20px rgba(99,102,241,0.3), var(--card-shadow);
+    transform: translateX(6px) !important;
+}
+
+/* ── Social Links Bounce ── */
+@keyframes social-bounce {
+    0%, 100% { transform: translateY(0); }
+    40%       { transform: translateY(-8px); }
+    70%       { transform: translateY(-4px); }
+}
+.social-links a:hover {
+    border-color: var(--brand-primary);
+    color: var(--brand-primary);
+    animation: social-bounce 0.5s ease;
+    background: rgba(6,182,212,0.08);
+    box-shadow: 0 0 16px rgba(6,182,212,0.3);
+}
+
+/* ── Button ripple ── */
+.btn { position: relative; overflow: hidden; }
+.btn::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 0; height: 0;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    transform: translate(-50%,-50%);
+    transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+}
+.btn:active::after { width: 300px; height: 300px; opacity: 0; }
+
+/* ── Profile photo hover zoom ── */
+.profile-photo {
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.profile-photo-container:hover .profile-photo {
+    transform: scale(1.05);
+}
+
+/* ── Cursor glow ── */
+.cursor { color: var(--brand-primary); }
+
+/* ── Stat number pop animation ── */
+@keyframes num-pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.18); }
+    100% { transform: scale(1); }
+}
+.stat-num.counted { animation: num-pop 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+
+
+/* --- Particle Canvas --- */
+#particles-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.45;
+}
+
+/* --- Background Glow Drift --- */
+@keyframes glow-drift-1 {
+    0%   { transform: translate(0,   0)   scale(1); }
+    33%  { transform: translate(60px,-40px) scale(1.1); }
+    66%  { transform: translate(-40px,60px) scale(0.95); }
+    100% { transform: translate(0,   0)   scale(1); }
+}
+@keyframes glow-drift-2 {
+    0%   { transform: translate(0,   0)   scale(1); }
+    33%  { transform: translate(-70px,50px) scale(1.1); }
+    66%  { transform: translate(50px,-60px) scale(0.9); }
+    100% { transform: translate(0,   0)   scale(1); }
+}
+.glow-1 { animation: glow-drift-1 18s ease-in-out infinite; }
+.glow-2 { animation: glow-drift-2 22s ease-in-out infinite; }
+
+/* --- Hero Stagger Entrance --- */
+@keyframes hero-fade-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.hero-section .greeting       { opacity: 0; animation: hero-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s forwards; }
+.hero-section .name-title     { opacity: 0; animation: hero-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; }
+.hero-section .role-title     { opacity: 0; animation: hero-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.6s forwards; }
+.hero-section .terminal-window{ opacity: 0; animation: hero-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.8s forwards; }
+.hero-section .hero-cta       { opacity: 0; animation: hero-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 1.0s forwards; }
+
+/* --- Reveal Delay Variants (for staggered children) --- */
+.reveal-delay-1 { transition-delay: 0.1s !important; }
+.reveal-delay-2 { transition-delay: 0.2s !important; }
+.reveal-delay-3 { transition-delay: 0.3s !important; }
+.reveal-delay-4 { transition-delay: 0.4s !important; }
+.reveal-delay-5 { transition-delay: 0.5s !important; }
+
+/* --- Skill Cards Stagger Pop-in --- */
+@keyframes skill-pop {
+    from { opacity: 0; transform: scale(0.7) translateY(20px); }
+    to   { opacity: 1; transform: scale(1)   translateY(0); }
+}
+.skill-card {
+    opacity: 0;
+    animation: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    will-change: transform;
+}
+.skill-card.animated {
+    animation: skill-pop 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+
+/* Hover tilt handled via JS — CSS perspective setup */
+.skills-grid {
+    perspective: 800px;
+}
+.skill-card:hover {
+    box-shadow: 0 12px 40px -12px rgba(6,182,212,0.45);
+    border-color: var(--brand-primary);
+}
+
+/* --- Education Cards Slide-in --- */
+.edu-card {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22,1,0.36,1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.edu-card.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+.edu-card:hover {
+    border-left-color: var(--brand-secondary);
+    box-shadow: -4px 0 20px rgba(99,102,241,0.3), var(--card-shadow);
+    transform: translateX(6px);
+}
+
+/* --- Section Title Gradient Sweep --- */
+.section-title-wrap {
+    position: relative;
+    display: inline-block;
+}
+.section-title-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--gradient-brand);
+    border-radius: 99px;
+    transition: width 0.8s cubic-bezier(0.22,1,0.36,1) 0.3s;
+}
+.section-title-wrap.animated::after {
+    width: 100%;
+}
+
+/* --- Social Links Bounce --- */
+@keyframes social-bounce {
+    0%, 100% { transform: translateY(0); }
+    40%       { transform: translateY(-8px); }
+    70%       { transform: translateY(-4px); }
+}
+.social-links a:hover {
+    border-color: var(--brand-primary);
+    color: var(--brand-primary);
+    animation: social-bounce 0.5s ease;
+    background: rgba(6,182,212,0.08);
+    box-shadow: 0 0 16px rgba(6,182,212,0.3);
+}
+
+/* --- Button Ripple Effect --- */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+.btn::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 0; height: 0;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    transform: translate(-50%,-50%);
+    transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+}
+.btn:active::after {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+}
+
+/* --- Navigation Link Underline Sweep --- */
+.nav-link {
+    position: relative;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--brand-primary);
+    transition: width 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* --- Profile Photo Hover --- */
+.profile-photo-container:hover .profile-photo {
+    transform: scale(1.04);
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.profile-photo {
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* --- Cursor hidden when not needed --- */
+.cursor { color: var(--brand-primary); }
+
+/* --- Stat number count-up pulse (applied via JS classname) --- */
+@keyframes num-pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.15); color: var(--brand-secondary); }
+    100% { transform: scale(1); }
+}
+.stat-num.animated {
+    animation: num-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
 }

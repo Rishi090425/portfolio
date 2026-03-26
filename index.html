@@ -16,6 +16,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div id="progress-bar"></div>
+    <!-- Particle Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Floating Resume Button (appears on scroll) -->
+    <a id="resume-fab"
+       href="https://github.com/Rishi090425/CV/blob/main/CV%20updated%20(1).pdf"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Download Resume">
+        <i data-lucide="file-text"></i>
+        <span>Resume</span>
+    </a>
     <!-- Background Decor (Glow Effects) -->
     <div class="bg-glow glow-1"></div>
     <div class="bg-glow glow-2"></div>
@@ -53,8 +66,8 @@
     </nav>
 
     <main>
-        <!-- Hero Section -->
-        <section id="hero" class="hero-section reveal">
+        <!-- ═══════════════ HERO SECTION ═══════════════ -->
+        <section id="hero" class="hero-section">
             <div class="hero-content">
                 <p class="greeting"><span class="code-prompt">~ $</span> whoami</p>
                 <h1 class="name-title">Rishi_Kumar<span class="blink-cursor">_</span></h1>
@@ -88,12 +101,13 @@
                 <path class="shape-fill" d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,192C672,213,768,203,864,181.3C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
-        <!-- About & Education Section -->
-        <section id="about" class="section reveal">
-            <h2 class="section-title">About Me</h2>
+
+        <!-- ═══════════════ ABOUT SECTION ═══════════════ -->
+        <section id="about" class="section">
+            <h2 class="section-title" data-anim="fade-down">About Me</h2>
             <div class="about-grid">
-                <div class="about-text glass-card flex-col">
-                    <h3 class="about-headline">Engineering digital experiences with precision & modern aesthetics.</h3>
+                <div class="about-text glass-card flex-col" data-anim="slide-left">
+                    <h3 class="about-headline">Engineering digital experiences with precision &amp; modern aesthetics.</h3>
                     <p class="about-p">
                         Hello! I'm Rishi, a passionate Full-Stack Engineer based in India. I specialize in architecting scalable, high-performance web applications from the ground up. My philosophy merges clean code principles with pixel-perfect, premium user interfaces.
                     </p>
@@ -102,24 +116,23 @@
                     </p>
                     
                     <div class="about-stats mt-4">
-                        <div class="stat-badge">
-                            <span class="stat-num">4+</span>
+                        <div class="stat-badge" data-anim="fade-up" data-anim-delay="0">
+                            <span class="stat-num" data-count="4" data-suffix="+">4+</span>
                             <span class="stat-label">Full-Stack<br>Projects</span>
                         </div>
-                        <div class="stat-badge">
-                            <span class="stat-num">18+</span>
+                        <div class="stat-badge" data-anim="fade-up" data-anim-delay="100">
+                            <span class="stat-num" data-count="18" data-suffix="+">18+</span>
                             <span class="stat-label">Technologies<br>Mastered</span>
                         </div>
-                        <div class="stat-badge">
-                            <span class="stat-num">10k+</span>
+                        <div class="stat-badge" data-anim="fade-up" data-anim-delay="200">
+                            <span class="stat-num" data-count="10" data-suffix="k+">10k+</span>
                             <span class="stat-label">Lines of<br>Clean Code</span>
                         </div>
                     </div>
                 </div>
-                <div class="about-image">
+                <div class="about-image" data-anim="slide-right">
                     <div class="profile-photo-container">
                         <div class="profile-glow"></div>
-                        <!-- IMPORTANT: When you are ready, simply place your photo inside the 'assets' folder and name it 'profile.jpg'. It will automatically overwrite the temporary blue 'RK' initials! -->
                         <img src="assets/profile.jpg" alt="Rishi Kumar" class="profile-photo" onerror="this.src='https://ui-avatars.com/api/?name=Rishi+Kumar&background=06b6d4&color=fff&size=512&font-size=0.4'">
                     </div>
                 </div>
@@ -133,9 +146,10 @@
                 <path class="shape-fill" d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,192C672,213,768,203,864,181.3C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
-        <!-- Projects Section -->
-        <section id="projects" class="section reveal">
-            <h2 class="section-title">Featured Projects</h2>
+
+        <!-- ═══════════════ PROJECTS SECTION ═══════════════ -->
+        <section id="projects" class="section">
+            <h2 class="section-title" data-anim="fade-down">Featured Projects</h2>
             <div class="projects-carousel-wrapper">
                 <button class="carousel-btn prev-btn" aria-label="Previous Project">
                     <i data-lucide="chevron-left"></i>
@@ -143,7 +157,7 @@
                 <div class="carousel-viewport">
                     <div class="carousel-track" id="project-track">
                         
-                        <div class="project-slide">
+                        <div class="project-slide" data-anim="zoom-up" data-anim-delay="0">
                             <div class="project-card group">
                                 <div class="project-image">
                                     <img src="assets/cv_analyzer.png" alt="AI CV Analyzer">
@@ -163,7 +177,7 @@
                             </div>
                         </div>
 
-                        <div class="project-slide">
+                        <div class="project-slide" data-anim="zoom-up" data-anim-delay="100">
                             <div class="project-card group">
                                 <div class="project-image">
                                     <img src="assets/stock_market.png" alt="Stockmarket Dashboard">
@@ -183,7 +197,7 @@
                             </div>
                         </div>
 
-                        <div class="project-slide">
+                        <div class="project-slide" data-anim="zoom-up" data-anim-delay="200">
                             <div class="project-card group">
                                 <div class="project-image">
                                     <img src="assets/expense_sharing.png" alt="Expense Sharing System">
@@ -203,7 +217,7 @@
                             </div>
                         </div>
 
-                        <div class="project-slide">
+                        <div class="project-slide" data-anim="zoom-up" data-anim-delay="300">
                             <div class="project-card group">
                                 <div class="project-image">
                                     <img src="assets/placement_tracker.png" alt="Placement Tracker">
@@ -229,7 +243,7 @@
                     <i data-lucide="chevron-right"></i>
                 </button>
             </div>
-            <div class="view-more text-center mt-12">
+            <div class="view-more text-center mt-12" data-anim="fade-up">
                 <a href="https://github.com/Rishi090425" target="_blank" class="btn btn-outline">
                     View more on GitHub
                 </a>
@@ -243,82 +257,29 @@
                 <path class="shape-fill" d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,192C672,213,768,203,864,181.3C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
-        <!-- Skills Section -->
-        <section id="skills" class="section reveal">
-            <h2 class="section-title" style="justify-content: center;">Programming Skills</h2>
+
+        <!-- ═══════════════ SKILLS SECTION ═══════════════ -->
+        <section id="skills" class="section">
+            <h2 class="section-title" style="justify-content: center;" data-anim="fade-down">Programming Skills</h2>
             <div class="skills-grid">
-                <div class="skill-card glass-card">
-                    <i class="devicon-mongodb-plain colored"></i>
-                    <h3>MongoDB</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-express-original" style="font-size: 5rem; color: var(--text-primary);"></i>
-                    <h3>Express.js</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-react-original colored"></i>
-                    <h3>React.js</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-nodejs-plain colored"></i>
-                    <h3>Node.js</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-javascript-plain colored" style="font-size: 3.5rem;"></i>
-                    <h3 style="margin-top: 0.5rem;">JavaScript</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-python-plain colored"></i>
-                    <h3>Python</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-nextjs-original" style="background: white; border-radius: 50%; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; color: black; font-size: 2.5rem; margin-bottom: 0.5rem;"></i>
-                    <h3>Next.js</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-typescript-plain colored" style="font-size: 3.5rem;"></i>
-                    <h3 style="margin-top: 0.5rem;">TypeScript</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-html5-plain colored"></i>
-                    <h3>HTML</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-css3-plain colored"></i>
-                    <h3>CSS</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-tailwindcss-plain colored"></i>
-                    <h3>Tailwind CSS</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-git-plain colored"></i>
-                    <h3>Git</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-github-original" style="font-size: 3.5rem; margin-top: 0.5rem; color: var(--text-primary);"></i>
-                    <h3 style="margin-top: 0.5rem;">GitHub</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-postgresql-plain colored"></i>
-                    <h3>PostgreSQL</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-docker-plain colored"></i>
-                    <h3>Docker</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-java-plain colored" style="font-size: 4.5rem;"></i>
-                    <h3>Java</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-mysql-plain colored"></i>
-                    <h3>MySQL</h3>
-                </div>
-                <div class="skill-card glass-card">
-                    <i class="devicon-redux-original colored"></i>
-                    <h3>Redux</h3>
-                </div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="0"><i class="devicon-mongodb-plain colored"></i><h3>MongoDB</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="60"><i class="devicon-express-original" style="font-size: 5rem; color: var(--text-primary);"></i><h3>Express.js</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="120"><i class="devicon-react-original colored"></i><h3>React.js</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="180"><i class="devicon-nodejs-plain colored"></i><h3>Node.js</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="240"><i class="devicon-javascript-plain colored" style="font-size: 3.5rem;"></i><h3 style="margin-top: 0.5rem;">JavaScript</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="300"><i class="devicon-python-plain colored"></i><h3>Python</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="360"><i class="devicon-nextjs-original" style="background: white; border-radius: 50%; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; color: black; font-size: 2.5rem; margin-bottom: 0.5rem;"></i><h3>Next.js</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="420"><i class="devicon-typescript-plain colored" style="font-size: 3.5rem;"></i><h3 style="margin-top: 0.5rem;">TypeScript</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="480"><i class="devicon-html5-plain colored"></i><h3>HTML</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="540"><i class="devicon-css3-plain colored"></i><h3>CSS</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="600"><i class="devicon-tailwindcss-plain colored"></i><h3>Tailwind CSS</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="660"><i class="devicon-git-plain colored"></i><h3>Git</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="720"><i class="devicon-github-original" style="font-size: 3.5rem; margin-top: 0.5rem; color: var(--text-primary);"></i><h3 style="margin-top: 0.5rem;">GitHub</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="780"><i class="devicon-postgresql-plain colored"></i><h3>PostgreSQL</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="840"><i class="devicon-docker-plain colored"></i><h3>Docker</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="900"><i class="devicon-java-plain colored" style="font-size: 4.5rem;"></i><h3>Java</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="960"><i class="devicon-mysql-plain colored"></i><h3>MySQL</h3></div>
+                <div class="skill-card glass-card" data-anim="flip-up" data-anim-delay="1020"><i class="devicon-redux-original colored"></i><h3>Redux</h3></div>
             </div>
         </section>
 
@@ -329,11 +290,12 @@
                 <path class="shape-fill" d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,192C672,213,768,203,864,181.3C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
-        <!-- Education Section -->
-        <section id="education" class="section reveal">
-            <h2 class="section-title text-center" style="justify-content: center; color: var(--text-primary); margin-bottom: 2rem;">Education</h2>
+
+        <!-- ═══════════════ EDUCATION SECTION ═══════════════ -->
+        <section id="education" class="section">
+            <h2 class="section-title text-center" style="justify-content: center; color: var(--text-primary); margin-bottom: 2rem;" data-anim="fade-down">Education</h2>
             <div class="edu-cards-container">
-                <div class="edu-card">
+                <div class="edu-card" data-anim="slide-left" data-anim-delay="0">
                     <div class="edu-card-row">
                         <i data-lucide="calendar" class="edu-icon"></i>
                         <span class="edu-date-text">2023 - Present</span>
@@ -351,7 +313,7 @@
                     </p>
                 </div>
 
-                <div class="edu-card">
+                <div class="edu-card" data-anim="slide-left" data-anim-delay="150">
                     <div class="edu-card-row">
                         <i data-lucide="calendar" class="edu-icon"></i>
                         <span class="edu-date-text">2022 - 2023</span>
@@ -369,7 +331,7 @@
                     </p>
                 </div>
 
-                <div class="edu-card">
+                <div class="edu-card" data-anim="slide-left" data-anim-delay="300">
                     <div class="edu-card-row">
                         <i data-lucide="calendar" class="edu-icon"></i>
                         <span class="edu-date-text">2020 - 2021</span>
@@ -396,9 +358,10 @@
                 <path class="shape-fill" d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,192C672,213,768,203,864,181.3C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section reveal">
-            <div class="contact-content glass-card">
+
+        <!-- ═══════════════ CONTACT SECTION ═══════════════ -->
+        <section id="contact" class="contact-section">
+            <div class="contact-content glass-card" data-anim="zoom-in">
                 <h2 class="section-title text-center">Get In Touch</h2>
                 <p class="contact-text text-center">
                     Whether you have a question or just want to say hi, my inbox is always open. I'll try my best to get back to you!
@@ -415,9 +378,9 @@
         </section>
     </main>
 
-    <footer>
+    <footer data-anim="fade-up">
         <p>Built with <i data-lucide="cpu" class="inline-icon"></i> by Rishi Kumar</p>
-        <p class="text-sm">Driven by clean code & elegant design.</p>
+        <p class="text-sm">Driven by clean code &amp; elegant design.</p>
     </footer>
 
     <script src="script.js"></script>

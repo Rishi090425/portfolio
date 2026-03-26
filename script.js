@@ -1,214 +1,260 @@
 /**
- * script.js
- * Rishi Kumar's Portfolio Script
+ * script.js — Rishi Kumar Portfolio
+ * Universal scroll-animation engine using [data-anim] attributes.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Helper to safely render icons if internet is available
-    function renderIcons() {
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
-    }
 
-    // 1. Initialize Lucide Icons
+    /* ── 0. Lucide icons ──────────────────────────── */
+    function renderIcons() {
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
     renderIcons();
 
-    // 2. Theme Toggle Logic
+    /* ── 1. Theme toggle ──────────────────────────── */
     const themeToggleBtn = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-    
-    // Check local storage or system preference
+    const html = document.documentElement;
+
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme) {
-        htmlElement.setAttribute('data-theme', savedTheme);
-    } else if (prefersDark) {
-        htmlElement.setAttribute('data-theme', 'dark');
-    } else {
-        htmlElement.setAttribute('data-theme', 'light');
-    }
+    const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+    html.setAttribute('data-theme', savedTheme || (prefersDark ? 'dark' : 'light'));
 
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            htmlElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-    }
+    themeToggleBtn?.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+    });
 
-    // 3. Mobile Menu Toggle
+    /* ── 2. Mobile menu ───────────────────────────── */
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-    
+    const mobileMenu    = document.getElementById('mobile-menu');
     let isMenuOpen = false;
 
     function toggleMenu() {
         isMenuOpen = !isMenuOpen;
-        if (mobileMenu) {
-            if (isMenuOpen) {
-                mobileMenu.classList.add('active');
-                if (mobileMenuBtn) mobileMenuBtn.innerHTML = '<i data-lucide="x"></i>';
-            } else {
-                mobileMenu.classList.remove('active');
-                if (mobileMenuBtn) mobileMenuBtn.innerHTML = '<i data-lucide="menu"></i>';
-            }
+        mobileMenu?.classList.toggle('active', isMenuOpen);
+        if (mobileMenuBtn) {
+            mobileMenuBtn.innerHTML = isMenuOpen
+                ? '<i data-lucide="x"></i>'
+                : '<i data-lucide="menu"></i>';
+            renderIcons();
         }
-        renderIcons(); // Re-render icons on state change
     }
+    mobileMenuBtn?.addEventListener('click', toggleMenu);
+    document.querySelectorAll('.mobile-link').forEach(l =>
+        l.addEventListener('click', () => { if (isMenuOpen) toggleMenu(); })
+    );
 
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', toggleMenu);
-    }
-    
-    // Close mobile menu when a link is clicked
-    if (mobileLinks) {
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (isMenuOpen) toggleMenu();
-            });
-        });
-    }
-
-    // 4. Navbar Scroll Effect
+    /* ── 3. Navbar shrink on scroll ───────────────── */
     const navbar = document.getElementById('navbar');
-    
+
+    /* ── Resume FAB ───────────────────────────────── */
+    const resumeFab = document.getElementById('resume-fab');
+
     window.addEventListener('scroll', () => {
-        if (navbar) {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        }
+        navbar?.classList.toggle('scrolled', window.scrollY > 50);
+        // Show resume FAB after scrolling past hero (~400px)
+        resumeFab?.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    // Render the lucide icon inside the FAB
+    renderIcons();
+
+    /* ── 4. Scroll progress bar ───────────────────── */
+    const progressBar = document.getElementById('progress-bar');
+    if (progressBar) {
+        window.addEventListener('scroll', () => {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            progressBar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+        }, { passive: true });
+    }
+
+    /* ── 5. Particle canvas ───────────────────────── */
+    const canvas = document.getElementById('particles-canvas');
+    if (canvas) {
+        const ctx   = canvas.getContext('2d');
+        let   parts = [];
+        const N     = 55;
+
+        const resize = () => { canvas.width = innerWidth; canvas.height = innerHeight; };
+        resize();
+        window.addEventListener('resize', resize);
+
+        const rnd = (a, b) => a + Math.random() * (b - a);
+
+        const newPart = () => ({
+            x: rnd(0, canvas.width),  y: rnd(0, canvas.height),
+            r: rnd(0.8, 2.2),
+            dx: rnd(-0.25, 0.25),     dy: rnd(-0.4, -0.1),
+            op: rnd(0.2, 0.55),
+            life: 0,                   max: rnd(200, 420)
+        });
+
+        parts = Array.from({ length: N }, newPart);
+
+        (function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const isDark = html.getAttribute('data-theme') !== 'light';
+            const c = isDark ? '6,182,212' : '37,99,235';
+
+            parts.forEach((p, i) => {
+                p.life++;
+                if (p.life > p.max) { parts[i] = newPart(); return; }
+                const lr = p.life / p.max;
+                const fade = lr < 0.1 ? lr * 10 : lr > 0.9 ? (1 - lr) * 10 : 1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${c},${p.op * fade})`;
+                ctx.fill();
+                p.x += p.dx; p.y += p.dy;
+            });
+            requestAnimationFrame(draw);
+        })();
+    }
+
+    /* ── 6. Universal scroll-animation engine ─────── */
+    /*
+     * Elements carry: data-anim="type"  data-anim-delay="ms"
+     * CSS holds the start states; JS adds .in-view to play them.
+     */
+    const animEls = document.querySelectorAll('[data-anim]');
+
+    animEls.forEach(el => {
+        const delay = el.dataset.animDelay;
+        if (delay) el.style.transitionDelay = delay + 'ms';
     });
 
-    // 5. Scroll Reveal Intersection Observer (Framer Motion alternative)
-    const revealElements = document.querySelectorAll('.reveal');
-    
-    const revealOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
     if ('IntersectionObserver' in window) {
-        const revealObserver = new IntersectionObserver((entries, observer) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
-                
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Stop observing once revealed
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
             });
-        }, revealOptions);
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-        revealElements.forEach(el => {
-            revealObserver.observe(el);
-        });
+        animEls.forEach(el => observer.observe(el));
     } else {
-        // Fallback for older browsers
-        revealElements.forEach(el => el.classList.add('active'));
+        animEls.forEach(el => el.classList.add('in-view'));
     }
 
-    // 6. Terminal Typing Animation
+    /* ── 7. Stat counter count-up ─────────────────── */
+    const statNums = document.querySelectorAll('.stat-num[data-count]');
+
+    if (statNums.length && 'IntersectionObserver' in window) {
+        const countObs = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el     = entry.target;
+                const target = +el.dataset.count;
+                const suffix = el.dataset.suffix || '';
+                const dur    = 1400;
+                const start  = performance.now();
+
+                el.classList.add('counted');
+
+                (function tick(now) {
+                    const p = Math.min((now - start) / dur, 1);
+                    const e = 1 - Math.pow(1 - p, 3); // ease-out cubic
+                    el.textContent = Math.round(e * target) + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                })(start);
+
+                countObs.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+
+        statNums.forEach(el => countObs.observe(el));
+    }
+
+    /* ── 8. Terminal typing animation ─────────────── */
     const typingText = document.getElementById('typing-text');
     if (typingText) {
-        const textToType = "I'm a B.Tech CSE (Full Stack) student specializing in building exceptional digital experiences. Currently exploring the intersection of modern web development and AI.";
-        let charIndex = 0;
-        
-        function typeWriter() {
-            if (charIndex < textToType.length) {
-                typingText.innerHTML += textToType.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, 30); // Typing speed
+        const msg = "I'm a B.Tech CSE (Full Stack) student specializing in building exceptional digital experiences. Currently exploring the intersection of modern web development and AI.";
+        let i = 0;
+        const type = () => {
+            if (i < msg.length) {
+                typingText.innerHTML += msg[i++];
+                setTimeout(type, 30);
             }
-        }
-        
-        // Start typing after a short delay
-        setTimeout(typeWriter, 1000);
+        };
+        setTimeout(type, 1000);
     }
 
-    // 7. 3D Project Coverflow Carousel
-    const track = document.getElementById('project-track');
+    /* ── 9. 3D Project Coverflow Carousel ─────────── */
+    const track   = document.getElementById('project-track');
     const prevBtn = document.querySelector('.prev-btn');
     const nextBtn = document.querySelector('.next-btn');
-    
-    if (track && prevBtn && nextBtn) {
-        let currentIndex = 0;
-        const slides = Array.from(track.children);
-        const slideCount = slides.length;
-        
-        function updateCarousel() {
-            const half = Math.floor(slideCount / 2);
-            const isMobile = window.innerWidth < 768;
-            
-            slides.forEach((slide, i) => {
-                let offset = i - currentIndex;
-                
-                // Looping logic
-                let diff = offset;
-                if (diff > half) diff -= slideCount;
-                else if (diff < -half + (slideCount % 2 === 0 ? 1 : 0)) diff += slideCount;
-                
-                let zIndex = 0;
-                let scale = 1;
-                let translateX = 0;
-                let rotateY = 0;
-                let opacity = 1;
 
-                if (diff === 0) { // Center
-                    zIndex = 5;
-                    scale = 1;
-                    translateX = 0;
-                    rotateY = 0;
-                    opacity = 1;
-                    slide.style.pointerEvents = 'auto';
-                } else if (diff === -1) { // Left
-                    zIndex = 4;
-                    scale = isMobile ? 0.8 : 0.85;
-                    translateX = isMobile ? -80 : -105;
-                    rotateY = 35; 
-                    opacity = 0.5;
-                    slide.style.pointerEvents = 'none';
-                } else if (diff === 1) { // Right
-                    zIndex = 4;
-                    scale = isMobile ? 0.8 : 0.85;
-                    translateX = isMobile ? 80 : 105; 
-                    rotateY = -35;
-                    opacity = 0.5;
-                    slide.style.pointerEvents = 'none';
-                } else { // Hidden/Back
-                    zIndex = 1;
-                    scale = 0.6;
-                    translateX = 0;
-                    rotateY = 0;
-                    opacity = 0;
-                    slide.style.pointerEvents = 'none';
-                }
-                
-                // Apply 3D transform
-                slide.style.transform = `translateX(${translateX}%) perspective(1200px) rotateY(${rotateY}deg) scale(${scale})`;
-                slide.style.zIndex = zIndex;
-                slide.style.opacity = opacity;
+    if (track && prevBtn && nextBtn) {
+        let cur    = 0;
+        const slides = Array.from(track.children);
+        const total  = slides.length;
+
+        const update = () => {
+            const half    = Math.floor(total / 2);
+            const mobile  = innerWidth < 768;
+            slides.forEach((s, i) => {
+                let diff = i - cur;
+                if (diff > half) diff -= total;
+                else if (diff < -half + (total % 2 === 0 ? 1 : 0)) diff += total;
+
+                let z = 0, sc = 1, tx = 0, ry = 0, op = 1;
+                if (diff === 0)       { z=5; sc=1;              tx=0;              ry=0;  op=1;   s.style.pointerEvents='auto'; }
+                else if (diff === -1) { z=4; sc=mobile ? 0.8 : 0.85; tx=mobile ? -80 : -105; ry=35;  op=0.5; s.style.pointerEvents='none'; }
+                else if (diff === 1)  { z=4; sc=mobile ? 0.8 : 0.85; tx=mobile ?  80 :  105; ry=-35; op=0.5; s.style.pointerEvents='none'; }
+                else                  { z=1; sc=0.6;             tx=0;              ry=0;  op=0;   s.style.pointerEvents='none'; }
+
+                s.style.transform = `translateX(${tx}%) perspective(1200px) rotateY(${ry}deg) scale(${sc})`;
+                s.style.zIndex    = z;
+                s.style.opacity   = op;
             });
-        }
-        
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % slideCount;
-            updateCarousel();
-        });
-        
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + slideCount) % slideCount;
-            updateCarousel();
-        });
-        
-        window.addEventListener('resize', updateCarousel);
-        
-        // Setup initial arrangement
-        updateCarousel();
+        };
+
+        nextBtn.addEventListener('click', () => { cur = (cur + 1) % total; update(); });
+        prevBtn.addEventListener('click', () => { cur = (cur - 1 + total) % total; update(); });
+        window.addEventListener('resize', update);
+        update();
     }
+
+    /* ── 10. Skill card 3-D tilt on hover ─────────── */
+    document.querySelectorAll('.skill-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const r  = card.getBoundingClientRect();
+            const dx = (e.clientX - r.left  - r.width  / 2) / (r.width  / 2);
+            const dy = (e.clientY - r.top   - r.height / 2) / (r.height / 2);
+            card.style.transform = `perspective(600px) rotateX(${-dy*12}deg) rotateY(${dx*12}deg) scale(1.08)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) scale(1)';
+        });
+    });
+
+    /* ── 11. Magnetic buttons ─────────────────────── */
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+            const r  = btn.getBoundingClientRect();
+            const dx = (e.clientX - r.left - r.width  / 2) * 0.15;
+            const dy = (e.clientY - r.top  - r.height / 2) * 0.15;
+            btn.style.transform = `translate(${dx}px,${dy}px)`;
+        });
+        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+
+    /* ── 12. Cursor glow ──────────────────────────── */
+    const cg = document.createElement('div');
+    Object.assign(cg.style, {
+        position:'fixed', width:'320px', height:'320px', borderRadius:'50%',
+        background:'radial-gradient(circle,rgba(6,182,212,0.07) 0%,transparent 70%)',
+        pointerEvents:'none', zIndex:'0',
+        transform:'translate(-50%,-50%)',
+        transition:'left 0.1s ease,top 0.1s ease',
+        willChange:'left,top',
+    });
+    document.body.appendChild(cg);
+    document.addEventListener('mousemove', e => {
+        cg.style.left = e.clientX + 'px';
+        cg.style.top  = e.clientY + 'px';
+    });
+
 });
